@@ -22,11 +22,7 @@
                 {{ $.Scratch.Set "terms" $data.Terms.Alphabetical }}
               {{ end }}
             {{ end }}
-            <!-- Non-relative paths also work - fallback in case the relative path stops working -->
-            {{ range $key, $value := ($.Scratch.Get "terms") }}
-              <!-- <li><a href="{{ $.Site.BaseURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}">{{ humanize $value.Name }}</a> {{ $value.Count }}</li> -->
-              <li><a href="{{ $value.Name | urlize }}">{{ humanize $value.Name }}</a> {{ $value.Count }}</li>
-            {{ end }}
+
 
           </ul>
         </article>
