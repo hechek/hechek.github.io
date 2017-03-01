@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dev on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/dev/</link>
+    <description>Recent content in Dev on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <lastBuildDate>Thu, 16 Feb 2017 22:12:15 +0900</lastBuildDate>
+    <atom:link href="https://hechek.github.io/categories/dev/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Gynvael Coldwind - Garage4Hackers - Notes from March 2014</title>
+      <link>https://hechek.github.io/blog/2017-02-16-gynvael-coldwind---garage4hackers---notes-from-march-2014/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:15 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-gynvael-coldwind---garage4hackers---notes-from-march-2014/</guid>
+      <description>&lt;p&gt;Back in March 2014, Garage4Hackers had a live stream with Gynvael Coldwind. His talk was named &amp;ldquo;Data, data, data! I can&amp;rsquo;t make bricks without clay&amp;rdquo; or a few practical notes on reverse-engineering. You can see the recording on youtube.&lt;/p&gt;
+
+&lt;p&gt;Here are my notes that I discovered from 2014.&lt;/p&gt;
+
+&lt;p&gt;Notes Garage4Hackers RE webinar by Gynvael Coldwind (Google)
+His website: &lt;a href=&#34;http://gynvael.coldwind.pl&#34;&gt;http://gynvael.coldwind.pl&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If ASM is hard, translate it to C for yourself.&lt;/p&gt;
+
+&lt;p&gt;Read through the manual and try to write your own pseudo-C code to understand it better.&lt;/p&gt;
+
+&lt;p&gt;Trace things&lt;/p&gt;
+
+&lt;p&gt;So if there are a lot of jumps with instructions in the middle.
+He wrote a GDB script to just go through the jumps and collect all of the instructions in between to simplify the assembly.
+Some debuggers have tracing as a separate option. E.g. OllyDBG&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://pelock.com/products/obfuscator&#34;&gt;http://pelock.com/products/obfuscator&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Twitch died and missed this tip name.&lt;/p&gt;
+
+&lt;p&gt;If you are working on an strange platform (e.g. IBM S/390), look at the manual and find the op-codes and go through them and translate them for yourself.
+Write a simple script to add instruction descriptions to the disassembled code. So you can have a description of what it does with every instruction and you do not have to go through the manual for each op-code again.&lt;/p&gt;
+
+&lt;p&gt;Be prepared to make your own tools&lt;/p&gt;
+
+&lt;p&gt;Diassembly Engines
+His favorite is “distorm” hosted on &lt;a href=&#34;https://code.google.com/p/distorm/&#34;&gt;https://code.google.com/p/distorm/&lt;/a&gt;. You can use it inside Python scripts to disassembler binaries from starting to end addresses.&lt;/p&gt;
+
+&lt;p&gt;Debug APIs
+Talked about useful debug APIs. E.g. CreateRemoteThread.&lt;/p&gt;
+
+&lt;p&gt;Twitch went down again.&lt;/p&gt;
+
+&lt;p&gt;CPU Specific Stuff (x86)
+Software breakpoints (CC aka int3).
+You can run code generator for Linux run on Windows with some changes.
+Change the dependencies, addressing and I/O.
+Goes through an example of a hash function in a Linux binary and then writing C code to allocate memory address at a specific address and then copying the hash function from Linux and putting it on the memory and then calling the function from the C code in windows.
+GDB is your friend even if you like others.
+It runs on any modern OS.
+Works with various GDB stubs (e.g. QEMU).
+Is scriptable in Python and GDB script.
+Is not well suited for anti-RE tricks.
+Scripting, use Python. WinDbg - Olly - IDA - Immunity and GDB support.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

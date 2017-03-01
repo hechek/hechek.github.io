@@ -1,0 +1,243 @@
+
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <p class="meta">Feb 16, 2017
+         - 2 minute read 
+         - <a href="https://hechek.github.io/blog/2017-02-16-windows-netsh-interface-portproxy/#disqus_thread">Comments</a>
+
+        
+        
+        
+            - <a class="label" href="https://hechek.github.io/categories/blog/">blog </a><a class="label" href="https://hechek.github.io/categories/deploy/">deploy </a>
+        
+    </p>
+    <h1 class="entry-title">
+         Windows Netsh Interface Portproxy 
+    </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          <p>I thought I had found the Windows iptables with Portproxy but I was wrong. But I learned something neat in the process and I am documenting it to access it when I need it.</p>
+
+<p>Portproxy allows you to listen on a certain port on one of your network interfaces (or all interfaces) and redirect all traffic to that interface (on your computer) to another port/IP address.</p>
+
+<p>The to that interface is the limitation that unfortunately kills it. This will be a short post.</p>
+
+<p>A typical Portproxy command is like this:</p>
+
+<p>netsh interface portproxy add v4tov4 listenport=9090 listenaddress=192.168.0.100
+ connectaddress=192.168.1.200 connectport=9095
+So I thought I could change the listenaddress:listenport and redirect all outgoing traffic to that IP:port to wherever I wanted (e.g. localhost) and not use the Windows etc\hosts file. But I was wrong, the command creates a listener on the interface with the listeneraddress IP and redirects all TCP traffic. In other words, the listeneraddress needs to be the IP of an interface of your machine. The traffic needs to be destined for your machine to be able to be redirected with this command. Well bummer.</p>
+
+<p>Install IPv6 Support</p>
+
+<p>Before we start, install IPv6 support in your OS. According to KB555744 Portproxy may not work if IPv6 support is not installed.</p>
+
+<p>Why? I don’t know but I think because Portproxy supports both IPv4 and IPv6 addresses which is a good thing. If you look at the MSDN link you can see the four variations that mix v4 and v6 addresses.</p>
+
+<p>Portproxy in Action</p>
+
+<p>Let’s do something simple first, we want to redirect anything that goes to 127.0.0.1:8888 to Google.com:443.</p>
+
+<p>Open an admin command prompt and run this command (protocol=tcp is optional because Portproxy only supports TCP):</p>
+
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn">헥헥™</span></span>
+    
+    <time>Feb 16, 2017</time>
+    
+      <span class="categories">
+        Tags :
+        
+          <a class="category" href="https://hechek.github.io/tags/syntax">syntax</a>  
+    
+    </span>
+  </p>
+
+  
+  
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://hechek.github.io/blog/2017-02-16-use-paimei-stalker-or-similar-tools-by-pedram-amini/" title="Use Paimei Stalker or Similar tools (by Pedram Amini)"><i class="fa fa-angle-double-left"></i>Use Paimei Stalker or Similar tools (by Pedram Amini)</a>
+    
+
+    
+        <a class="basic-alignment right" href="https://hechek.github.io/blog/2017-02-16-portproxy-in-action/" title="Portproxy in Action">Portproxy in Action<i class="fa fa-angle-double-right"></i></a>
+    
+  </p>
+  
+    
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    
+    
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'github-hugo';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+  
+</footer>
+
+        <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    
+    
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'github-hugo';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <div class="google-search">
+    <gcse:search></gcse:search>
+  </div>
+
+  <section class="first odd">
+    
+
+      <h1>Site Information</h1>
+    
+
+    <p>
+      
+        學而時習之 不亦說乎</br>有朋自遠方來 不亦樂乎</br>人不知而不溫 不亦君子乎</br>
+      
+    </p>
+  </section>
+
+  
+  
+  
+    
+      <section class="even">
+        &nbsp;<br>
+        <h1>Recent Posts</h1>
+        <ul id="recent_posts">
+          
+            <li class="post">
+              <a href="/blog/2017-02-26-%EC%95%A0%ED%94%8C-icloud.net-%EB%8F%84%EB%A9%94%EC%9D%B8-%EB%84%A4%EC%9E%84%EC%9D%84-150%EB%A7%8C-%EB%B6%88%EC%97%90-%EC%9D%B8%EC%88%98/">애플, &#39;iCloud.net&#39; 도메인 네임을 150만 불에 인수</a>
+            </li>
+          
+            <li class="post">
+              <a href="/blog/2017-02-20-%EC%B0%A8%EA%B8%B0-%EB%A7%A5%EB%B6%81%ED%94%84%EB%A1%9C-%ED%84%B0%EC%B9%98-%EB%B0%94-%EB%AA%A8%EB%8D%B8%EC%97%90-%EC%B9%B4%EB%B9%84%EB%A0%88%EC%9D%B4%ED%81%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C-%ED%83%91%EC%9E%AC-%EA%B0%80%EB%8A%A5-%EB%8B%A8%EC%84%9C-%EB%B0%9C%EA%B2%AC/">차기 &#39;맥북프로 터치 바 모델&#39;에 &#39;카비레이크 프로세서&#39; 탑재 가능 단서 발견</a>
+            </li>
+          
+            <li class="post">
+              <a href="/blog/2017-02-16-its-been-a-while-since-burp/">It’s been a while since Burp</a>
+            </li>
+          
+            <li class="post">
+              <a href="/blog/2017-02-16-cloudfront-and-tls/">Cloudfront and TLS</a>
+            </li>
+          
+            <li class="post">
+              <a href="/blog/2017-02-16-looking-for-apps-to-proxy/">Looking for Apps to Proxy</a>
+            </li>
+          
+        </ul>
+      </section>
+    
+  
+
+  
+
+   
+     
+       <section class="odd">
+         
+           <h1>Categories</h1>
+         
+         
+           <li>
+             <a href="https://www.google.com" title="Google" >Google</a>
+           </li>
+         
+           <li>
+             <a href="https://hechek.github.io/categories/hugo/" title="Hugo" >Hugo</a>
+           </li>
+         
+       </section>
+     
+   
+
+</aside>
+
+  </div>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2017 헥헥™ -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a>, with <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress theme</a>.
+</p>
+
+</footer>
+
+
+<script>
+  (function() {
+    var cx = '000608897642208821638:4zqvt_loiyq';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script>
+  var _gaq=[['_setAccount','UA-92602181-2'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+
+</body>
+</html>
+
