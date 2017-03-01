@@ -1,0 +1,125 @@
+languageCode = "ko-kr"
+title = "헥헥 블로그"
+baseurl = "https://hechek.github.io/"
+theme = "Hugo-Octopress"
+
+
+
+# Do not make the url/path to lowercase
+disablePathToLower = false
+
+# Number of blog posts displayed in each page
+paginate = 5
+
+[permalinks]
+post = "/blog/:year-:month-:day-:title/" # change the post URL to look like the old ones
+
+[indexes]
+# Make tags and categories work
+tag = "tags"
+category = "categories"
+
+[params]
+
+# css override
+customCSS = ["css/custom.css"]
+
+# If false, all of the post will appear on front page (and in pagination)
+truncate = true
+
+# Author's name (this will appear in metadata and under posts)
+author = "헥헥™"
+
+# This text appears in the site header under website title
+brand = "hec·hek's Blog"
+subtitle = "Various private stuff"
+
+# Used in the search engine
+searchEngineURL = "https://www.google.co.kr/search"
+
+# Text of the "Continue Reading" label. &rarr; == right arrow, but it gets messed up in the string so we will add it to index.html manually
+continueReadingText = "Read more"
+
+# Google analytics code
+googleAnalytics = "UA-92602181-2"
+
+# Disqus shortcode
+# Disable comments for a specific post by adding "comments: false" in its frontmatter
+disqusShortname = "github-hugo"
+
+rss = false  # switch to true to enable RSS icon link
+
+# Set to true to use a text label for RSS instead of an icon
+# This is overwritten by the `rss` setting
+textrss = false
+
+# Website's default description
+defaultDescription = ""
+
+# Populate this with your own search keywords - these will appear in the meta tags
+# defaultKeywords = ["keyword1" , "keyword2" , "keyword3" , "keyword4"]
+
+# Keep it as false please, the css file contains the code for highlighting
+pygmentsuseclasses = false
+
+# If nothing is set, then solarized_light is used
+# Other styles can be viewed in [http://pygments.org/](http://pygments.org/)
+pygmentsstyle = "solarized_light"
+
+# Highlight shortcode and code fences (```) will be treated similarly
+pygmentscodefences = true
+
+# pygments options can be added here
+# Hugo supports these pygments options: style, encoding, noclasses, hl_lines, linenos
+# for example: pygmentsoptions = "linenos=true"
+
+# If set to true, navigation menu links will open in a new window with the exception of links to root ("/")
+# If this item does not exist or set to false, then navigation menu links will open in the same window
+navigationNewWindow = true
+
+# config sidebar text in sidebar
+sidebarHeader = "Site Information"
+sidebarText = "學而時習之 不亦說乎</br>有朋自遠方來 不亦樂乎</br>人不知而不溫 不亦君子乎</br>"
+
+# social network icons
+github = ""
+bitbucket = ""
+gitlab = ""
+twitter = ""
+keybase = ""
+stackoverflow = ""
+linkedin = ""
+googleplus = ""
+youtube = ""
+facebook = ""
+
+# enable categories menu in sidebar
+sidebarMenuEnabled = true
+sidebarMenuHeader = "Categories"
+
+# recent posts can be displayed in the sidebar
+sidebarRecentLimit = 5
+
+# enable to open the sidebar links in a new window
+sidebarNewWindow = false
+
+# create pages that list all taxonomies (categories and tags)
+generateTaxonomyList = true
+
+# This is not needed unless alphabetical sort is needed
+sortTaxonomyAlphabetical = true
+
+[blackfriday]
+hrefTargetBlank = true # open the external links in a new window
+fractions = false
+
+
+[[menu.sidebar]]
+Name = "Google"
+URL = "https://www.google.com"
+weight = 0
+
+[[menu.sidebar]]
+Name = "Hugo"
+URL = "/categories/hugo/"
+weight = 1
