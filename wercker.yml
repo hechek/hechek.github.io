@@ -2,9 +2,9 @@ box: debian
 build:
   steps:
     - arjen/hugo-build:
-        version: "0.18.1"
+        version: "0.14"
         theme: Hugo-Octopress
-        flags: --buildDrafts=false
+        flags: --buildDrafts=true
 deploy:
   steps:
     - install-packages:
