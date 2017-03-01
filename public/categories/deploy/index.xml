@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deploy on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/deploy/index.xml</link>
+    <description>Recent content in Deploy on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/deploy/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Windows Netsh Interface Portproxy</title>
+      <link>https://hechek.github.io/blog/2017-02-16-windows-netsh-interface-portproxy/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:24 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-windows-netsh-interface-portproxy/</guid>
+      <description>&lt;p&gt;I thought I had found the Windows iptables with Portproxy but I was wrong. But I learned something neat in the process and I am documenting it to access it when I need it.&lt;/p&gt;
+
+&lt;p&gt;Portproxy allows you to listen on a certain port on one of your network interfaces (or all interfaces) and redirect all traffic to that interface (on your computer) to another port/IP address.&lt;/p&gt;
+
+&lt;p&gt;The to that interface is the limitation that unfortunately kills it. This will be a short post.&lt;/p&gt;
+
+&lt;p&gt;A typical Portproxy command is like this:&lt;/p&gt;
+
+&lt;p&gt;netsh interface portproxy add v4tov4 listenport=9090 listenaddress=192.168.0.100
+ connectaddress=192.168.1.200 connectport=9095
+So I thought I could change the listenaddress:listenport and redirect all outgoing traffic to that IP:port to wherever I wanted (e.g. localhost) and not use the Windows etc\hosts file. But I was wrong, the command creates a listener on the interface with the listeneraddress IP and redirects all TCP traffic. In other words, the listeneraddress needs to be the IP of an interface of your machine. The traffic needs to be destined for your machine to be able to be redirected with this command. Well bummer.&lt;/p&gt;
+
+&lt;p&gt;Install IPv6 Support&lt;/p&gt;
+
+&lt;p&gt;Before we start, install IPv6 support in your OS. According to KB555744 Portproxy may not work if IPv6 support is not installed.&lt;/p&gt;
+
+&lt;p&gt;Why? I don’t know but I think because Portproxy supports both IPv4 and IPv6 addresses which is a good thing. If you look at the MSDN link you can see the four variations that mix v4 and v6 addresses.&lt;/p&gt;
+
+&lt;p&gt;Portproxy in Action&lt;/p&gt;
+
+&lt;p&gt;Let’s do something simple first, we want to redirect anything that goes to 127.0.0.1:8888 to Google.com:443.&lt;/p&gt;
+
+&lt;p&gt;Open an admin command prompt and run this command (protocol=tcp is optional because Portproxy only supports TCP):&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

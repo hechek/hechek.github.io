@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/blog/index.xml</link>
+    <description>Recent content in Blog on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Windows Netsh Interface Portproxy</title>
+      <link>https://hechek.github.io/blog/2017-02-16-windows-netsh-interface-portproxy/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:24 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-windows-netsh-interface-portproxy/</guid>
+      <description>&lt;p&gt;I thought I had found the Windows iptables with Portproxy but I was wrong. But I learned something neat in the process and I am documenting it to access it when I need it.&lt;/p&gt;
+
+&lt;p&gt;Portproxy allows you to listen on a certain port on one of your network interfaces (or all interfaces) and redirect all traffic to that interface (on your computer) to another port/IP address.&lt;/p&gt;
+
+&lt;p&gt;The to that interface is the limitation that unfortunately kills it. This will be a short post.&lt;/p&gt;
+
+&lt;p&gt;A typical Portproxy command is like this:&lt;/p&gt;
+
+&lt;p&gt;netsh interface portproxy add v4tov4 listenport=9090 listenaddress=192.168.0.100
+ connectaddress=192.168.1.200 connectport=9095
+So I thought I could change the listenaddress:listenport and redirect all outgoing traffic to that IP:port to wherever I wanted (e.g. localhost) and not use the Windows etc\hosts file. But I was wrong, the command creates a listener on the interface with the listeneraddress IP and redirects all TCP traffic. In other words, the listeneraddress needs to be the IP of an interface of your machine. The traffic needs to be destined for your machine to be able to be redirected with this command. Well bummer.&lt;/p&gt;
+
+&lt;p&gt;Install IPv6 Support&lt;/p&gt;
+
+&lt;p&gt;Before we start, install IPv6 support in your OS. According to KB555744 Portproxy may not work if IPv6 support is not installed.&lt;/p&gt;
+
+&lt;p&gt;Why? I don’t know but I think because Portproxy supports both IPv4 and IPv6 addresses which is a good thing. If you look at the MSDN link you can see the four variations that mix v4 and v6 addresses.&lt;/p&gt;
+
+&lt;p&gt;Portproxy in Action&lt;/p&gt;
+
+&lt;p&gt;Let’s do something simple first, we want to redirect anything that goes to 127.0.0.1:8888 to Google.com:443.&lt;/p&gt;
+
+&lt;p&gt;Open an admin command prompt and run this command (protocol=tcp is optional because Portproxy only supports TCP):&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thick Client Proxying - Part 6: How HTTP(s) Proxies Work</title>
+      <link>https://hechek.github.io/blog/2017-02-16-thick-client-proxying---part-6-how-https-proxies-work/</link>
+      <pubDate>Thu, 16 Feb 2017 22:01:19 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-thick-client-proxying---part-6-how-https-proxies-work/</guid>
+      <description>&lt;p&gt;In order to create our own custom proxies, first we need to know how proxies work. When I wanted to write a custom proxy tool (it’s a simple Python script) in Hipchat part3, I had to go back and learn how they work. I did not find such a resource online that looked at proxies from an infosec perspective. Most talked about how to configure caching or forwarding proxies and not much about MitM ones. I have briefly talked about it in the section 2 of the same post named How does a Proxy Work?. In this post I am going to take a deep(er) dive. I actually read some RFCs and they were surprisingly well written.&lt;/p&gt;
+
+&lt;p&gt;If you want to skip the intro, go to section 3.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Why do I Need to Know How Proxies Work?
+That is a fair question. Most of the time, we pipe the browser to Burp and it works out of the box. However, if something small changes we will go into panic mode. What if the webapp uses a Java or Silverlight component and it has some quirky things? Another reason is for proxying thick clients because Burp as you have seen here is not just for webapps. My opinion is “if the application uses HTTP, you can Burp it.” Thick clients may not work out of the box when proxied (often just redirecting their traffic to the proxy is a pain). If we do not know how proxies work internally, we cannot troubleshoot the issues.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You are now convinced that you need to read this right? riiiiiiiiiiiiight?&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Become One with the Proxy
+It really helps to put ourselves in place of the proxy when reading this. At least that is what worked for me. Proxy does not know whatever happens in the system like an observer. As an observer we can just make decisions about what the proxy should do. Things like “the user typed google.com in their browser so the proxy must send the request to google.com.” Well, how does the proxy know that? The proxy cannot magically see the browser’s address bar.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1.1. What does it Mean?&lt;/p&gt;
+
+&lt;p&gt;We are the proxy. The only things we see are the requests/packets that the client (e.g. browser) and the endpoint send to us. We do not know anything else. And as a proxy we must decide what to do with the requests that we receive with only our knowledge.&lt;/p&gt;
+
+&lt;p&gt;Now that we are hopefully in the zone, let’s start.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Brief Intro to Two Types of Proxies
+I am going to talk about two types of proxies here.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Forwarding proxies
+TLS terminating proxies
+The descriptions are not entirely accurate or detailed but are enough for our purpose. Of course this is not an exhaustive list. There are other proxies out there but these are the ones that we are interested in. To be honest we are only interested in TLS terminating proxies.&lt;/p&gt;
+
+&lt;p&gt;2.1. Forwarding Proxies&lt;/p&gt;
+
+&lt;p&gt;We have all seen them before. These are corporate proxies that we see and use everyday. If you are in a corporate environment, check the proxy auto-config (pac) scripts. Essentially it’s a text file that tells the application where to send the traffic and re-routes the traffic based on the endpoint. Usually if the endpoint is internal, things get routed normally through the internal network otherwise (requests sent over the internet) requests are sent to a forwarding proxy. You can see some examples at Microsoft Technet. From the point of view of the application, the forwarding proxy is sitting between the internal network and the internet.&lt;/p&gt;
+
+&lt;p&gt;Based on the name, these proxies just forward packets and cannot look inside encrypted payloads (e.g. TLS). From the point of view of a typical forwarding proxy, an established TLS connection is just a bunch of packets with random looking TCP payloads.&lt;/p&gt;
+
+&lt;p&gt;2.2. TLS Terminating Proxies&lt;/p&gt;
+
+&lt;p&gt;Burp is the prime example of this type. If you know what Burp does (and you probably do because you are reading this), you know what a TLS terminating proxy does. These are proxies that usually MitM the connections and unwrap TLS to look inside the payloads.&lt;/p&gt;
+
+&lt;p&gt;They could be applications like Burp or Fiddler which are usually used for (security) testing. Or could be appliances like Bluecoat or the SSL decryption module of Palo Alto Networks’ “thing” (whatever it is named). Usually these appliances are used for deep packet inspection.&lt;/p&gt;
+
+&lt;p&gt;You could make Burp work like a forwarding proxy by adding all endpoints to Burp’s SSL Pass Through. This is useful for troubleshooting connections.&lt;/p&gt;
+
+&lt;p&gt;2.2.1. It’s not Always TLS
+True. Sometimes our proxy decrypts (or decodes) layers of non-TLS encryption (or encoding). I am classifying all of these proxies under this category because TLS has become the most common way of protecting data in transit.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;How HTTP(s) Proxies work
+Now we get to the main part. In all examples we have a browser that uses a proxy (via some proxy settings) and the browser knows that it is connected to a proxy (I will talk about this later).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;3.1. HTTP Proxy&lt;/p&gt;
+
+&lt;p&gt;In this case the browser is using plain HTTP (meaning there’s no TLS). Both forwarding and TLS terminating proxies work similarly in this case.&lt;/p&gt;
+
+&lt;p&gt;Let’s assume we have typed &lt;a href=&#34;http://www.yahoo.com&#34; target=&#34;_blank&#34;&gt;http://www.yahoo.com&lt;/a&gt; in the browser. Let’s forget that we get a 302 redirect in the real world and assume yahoo.com is available over HTTP. I probably should have used example.com instead but I am lazy and don’t want to create the diagrams again.&lt;/p&gt;
+
+&lt;p&gt;The browser establishes a TCP connection to the proxy (the famous SYN-SYNACK-ACK) and then sends the GET request.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

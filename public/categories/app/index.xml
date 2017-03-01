@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>App on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/app/index.xml</link>
+    <description>Recent content in App on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/app/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Thick Client Proxying - Part 5: FileHippo App Manager or the Bloated Hippo</title>
+      <link>https://hechek.github.io/blog/2017-02-16-thick-client-proxying---part-5-filehippo-app-manager-or-the-bloated-hippo/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:43 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-thick-client-proxying---part-5-filehippo-app-manager-or-the-bloated-hippo/</guid>
+      <description>&lt;p&gt;I have talked a lot about this and that but have done nothing in action. Now I will talk about proxying actual applications. I will start with something easy, the FileHippo App Manager. This app was chosen because it can be proxied with Burp, it does not use TLS and it has its own proxy settings (also works with Internet Explorer proxy settings). The requests are pretty simple to understand. I like the FileHippo website because it archives old versions of software. For example I loved the non-bloated Yahoo! Messenger 8.0 when I used it (it’s pretty popular in some places) and used FileHippo to download the old versions.&lt;/p&gt;
+
+&lt;p&gt;FileHippo App Manager turned out to be more interesting than I thought and this post turned into some .NET reverse engineering using dnSpy. Here’s what I talk about in this post:&lt;/p&gt;
+
+&lt;p&gt;The app contains the AWS SDK and a fortunately invalid set of AWS Access/Secret keys. Both the SDK and the keys are in dead code.
+Requests have an AccessToken header which is generated client-side. We will discuss how it is generated.
+The application has a “hidden” DEBUG mode which unfortunately does nothing special. We will discover how to enable it.
+Note: I attempted to contact both Well Known Media (parent company of FileHippo) and FileHippo via their security addresses. security@filehippo.com and security@wkmedia.com do not exist. I contacted them via their only email on the Well Known Media website which is adsales@wkemdia.com and got no response. I tried to check the validity of the keys using the most non-intrusive way possible as discussed below and fortunately they were not valid so I went ahead and shared the adventure.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Ingredients
+Windows 7 VM
+FileHippo App Manager 2.0 beta 4
+Burp free
+JSON Decoder plugin from Burp’s App Store
+dnSpy&lt;/li&gt;
+&lt;li&gt;Proxying
+2.1 Proxy settings&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Install and run the application. Click on the Settings gear icon to the left and then select the Connection tab to see the proxy settings.&lt;/p&gt;
+
+&lt;p&gt;Application&amp;rsquo;s proxy settings
+Application&amp;rsquo;s proxy settings
+As you can see, the application supports its own proxy settings and also can use IE proxy settings via the Auto-detect proxy settings for this network. It does not really matter which method is chosen, we can use both of these to point the application to Burp. Point it to Burp’s proxy listener (default is 127.0.0.1:8080), run Burp and then press Test.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

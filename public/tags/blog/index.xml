@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on 헥헥 블로그</title>
+    <link>https://hechek.github.io/tags/blog/index.xml</link>
+    <description>Recent content in Blog on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>It’s been a while since Burp</title>
+      <link>https://hechek.github.io/blog/2017-02-16-its-been-a-while-since-burp/</link>
+      <pubDate>Thu, 16 Feb 2017 22:20:39 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-its-been-a-while-since-burp/</guid>
+      <description>&lt;p&gt;It’s been a while since Burp part four and I want to continue writing these. It’s time to actually proxy applications. However I have three problems: I was too busy at work. I could not find a lot of interesting applications that are interesting to proxy and can showcase different Burp functionalities that we talked about. I found some interesting applications but there were security vulns so I am going through disclosure (unfortunately I may never be able to release them publicly).&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Use Paimei Stalker or Similar tools (by Pedram Amini)</title>
+      <link>https://hechek.github.io/blog/2017-02-16-use-paimei-stalker-or-similar-tools-by-pedram-amini/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:20 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-use-paimei-stalker-or-similar-tools-by-pedram-amini/</guid>
+      <description>&lt;p&gt;SetBP(Address, function_to_call_when_the_address_is_reached)
+Twitch died again :(&lt;/p&gt;
+
+&lt;p&gt;Monitor the environment.
+Use these tools. * Linux: strace and ltrace. * On Windows : Process Monitor.&lt;/p&gt;
+
+&lt;p&gt;Example from a CTF.
+Mixer: It needed a certain library. So you have to install all dependencies. Use “ldd” to check if you have everything.&lt;/p&gt;
+
+&lt;p&gt;LD_LIBRARY_PATH environmental variable.
+readelf -l binaryname
+will show us which loader is needed for this library.&lt;/p&gt;
+
+&lt;p&gt;It loaded the application in GDB but could not debug.
+Two solutions: 1. Attach after running, bad idea. 2. Manually enter CC CC at EP by ediuting the hex. 3. Then run it in GDB.&lt;/p&gt;
+
+&lt;p&gt;You do not need to analyze everything - probably the most important thing when doing RE
+If you have a blackbox with a small-ish input/output space, let it run and look at output to find out what it does.&lt;/p&gt;
+
+&lt;p&gt;The tool might be wrong. Check the output.
+Entropy is a good recon tool.
+Know Crypto and other stuff and be able to recognize it.
+I asked him for an alternative to IDA pro for x64 binaries. He didn’t have any alternatives as he uses IDA Pro.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

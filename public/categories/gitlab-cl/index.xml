@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gitlab Cl on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/gitlab-cl/index.xml</link>
+    <description>Recent content in Gitlab Cl on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/gitlab-cl/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Portproxy in Action</title>
+      <link>https://hechek.github.io/blog/2017-02-16-portproxy-in-action/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:28 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-portproxy-in-action/</guid>
+      <description>&lt;p&gt;Let’s do something simple first, we want to redirect anything that goes to 127.0.0.1:8888 to Google.com:443.&lt;/p&gt;
+
+&lt;p&gt;Open an admin command prompt and run this command (protocol=tcp is optional because Portproxy only supports TCP):&lt;/p&gt;
+
+&lt;p&gt;netsh interface portproxy add v4tov4 listenport=9090 listenaddress=127.0.0.1
+ connectaddress=216.58.217.78 connectport=443 protocol=tcp
+Remember to remove the new line (I have split the command into two lines for better readability).&lt;/p&gt;
+
+&lt;p&gt;This command creates a listener on localhost:9090 and forwards all traffic to 216.58.217.78:443 (which is Google for me - you will probably get a different IP address if you ping it).&lt;/p&gt;
+
+&lt;p&gt;We can display all current portproxy listeners using netsh interface portproxy show all.&lt;/p&gt;
+
+&lt;p&gt;In the same admin command prompt run this command to see the listener: netstat -anb | findstr 9090.&lt;/p&gt;
+
+&lt;p&gt;Portproxy to Google
+Portproxy to Google
+Now open a browser and navigate to &lt;a href=&#34;https://localhost:9090&#34; target=&#34;_blank&#34;&gt;https://localhost:9090&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Obviously bad certificate
+Obviously bad certificate
+Accept the security exception and we will see:&lt;/p&gt;
+
+&lt;p&gt;Somewhere in Google land
+Somewhere in Google land
+Not exactly Google.com but you know what we accomplished.&lt;/p&gt;
+
+&lt;p&gt;Other Uses&lt;/p&gt;
+
+&lt;p&gt;Apart from doing failed tricks we can do other things with this. As we saw we can redirect local resources to remote ones. Another is port changing, we can redirect the traffic to localhost via different means (e.g. hosts file) but the port is still the original one used by the application. Using this we can redirect the port to another one on a remote machine (e.g. a VM running a proxy tool). In other words we will not need the Traffic Redirector Burp extension anymore.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

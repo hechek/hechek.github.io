@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Markdown on 헥헥 블로그</title>
+    <link>https://hechek.github.io/tags/markdown/index.xml</link>
+    <description>Recent content in Markdown on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/tags/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Looking for Apps to Proxy</title>
+      <link>https://hechek.github.io/blog/2017-02-16-looking-for-apps-to-proxy/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:50 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-looking-for-apps-to-proxy/</guid>
+      <description>&lt;p&gt;It’s been a while since Burp part four and I want to continue writing these. It’s time to actually proxy applications. However I have three problems:&lt;/p&gt;
+
+&lt;p&gt;I was too busy at work.
+I could not find a lot of interesting applications that are interesting to proxy and can showcase different Burp functionalities that we talked about.
+I found some interesting applications but there were security vulns so I am going through disclosure (unfortunately I may never be able to release them publicly).
+The last point was a surprise, these are decently popular apps and I could not believe that no one has looked at them before.&lt;/p&gt;
+
+&lt;p&gt;Nevertheless, I will continue soon.&lt;/p&gt;
+
+&lt;p&gt;In the meanwhile, Burp version 1.7 has been released. Now we have Burp projects. Instead of saving the state everyday, we can use one project file that contains all the items. Pretty cool. Some of the items have changed, especially options. Now it has User Options and Project Options but the options by themselves are still there.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

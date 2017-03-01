@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mac on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/mac/index.xml</link>
+    <description>Recent content in Mac on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/mac/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>차기 &#39;맥북프로 터치 바 모델&#39;에 &#39;카비레이크 프로세서&#39; 탑재 가능 단서 발견</title>
+      <link>https://hechek.github.io/blog/2017-02-20-%EC%B0%A8%EA%B8%B0-%EB%A7%A5%EB%B6%81%ED%94%84%EB%A1%9C-%ED%84%B0%EC%B9%98-%EB%B0%94-%EB%AA%A8%EB%8D%B8%EC%97%90-%EC%B9%B4%EB%B9%84%EB%A0%88%EC%9D%B4%ED%81%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C-%ED%83%91%EC%9E%AC-%EA%B0%80%EB%8A%A5-%EB%8B%A8%EC%84%9C-%EB%B0%9C%EA%B2%AC/</link>
+      <pubDate>Mon, 20 Feb 2017 00:52:37 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-20-%EC%B0%A8%EA%B8%B0-%EB%A7%A5%EB%B6%81%ED%94%84%EB%A1%9C-%ED%84%B0%EC%B9%98-%EB%B0%94-%EB%AA%A8%EB%8D%B8%EC%97%90-%EC%B9%B4%EB%B9%84%EB%A0%88%EC%9D%B4%ED%81%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C-%ED%83%91%EC%9E%AC-%EA%B0%80%EB%8A%A5-%EB%8B%A8%EC%84%9C-%EB%B0%9C%EA%B2%AC/</guid>
+      <description>&lt;p&gt;오늘 배포된 두 번째 &amp;lsquo;macOS 10.12.4 개발자 베타 버전&amp;rsquo;의 내부 파일을 들여다본 결과 7세대 인텔 코어 프로세서인 &amp;lsquo;카비레이크&amp;rsquo;가 탑재될 수도 있다는 단서가 있음을 &amp;lsquo;애플인사이더&amp;rsquo;, &amp;lsquo;9to5mac&amp;rsquo; 등 여러 해외 IT 매체들이 일제히 기사를 실었습니다.&lt;/p&gt;
+
+&lt;p&gt;이 단서들은 애플 관련 전문 블로그인  &amp;lsquo;파이크스 유니버즘(Pike &amp;rsquo;s Universum)&amp;lsquo;에 의해 밝혀진 것으로 지난 1월 &amp;lsquo;CES 2017&amp;rsquo;에서 &amp;lsquo;카비레이크 프로세서들&amp;rsquo;이 맥 제품군에 탑재될 것으로 점쳐지는 발표가 있은 후이기에 그 의미가 크게 느껴집니다.&lt;/p&gt;
+
+&lt;p&gt;&amp;lsquo;파이크스 유니버즘(Pike&amp;rsquo;s Universum)&amp;lsquo;은 오늘 배포된(우리나라 시각) &amp;lsquo;macOS 10.12.4 개발자 버전 2&amp;rsquo;의 하드웨어 관련 코드를 살펴보던 중 아래와 같이 현재 출시된 맥북프로와는 다른 종류의 코드들이 담겨 있는 것을 확인하였고 이를 근거로 다음에 발표될 2세대 &amp;lsquo;맥북프로&amp;rsquo; 제품군에 &amp;lsquo;카비레이크 프로세서&amp;rsquo;의 탑재를 점치고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;프로세서 자체의 성능은 스카이레이크와 비교해서 월등히 향상된 느낌이 들 수는 없지만, 전력 효율에 따른 배터리 지속 시간 향상과 내장 그래픽의 성능이 기대된다는 평가를 받는 &amp;lsquo;카비레이크 프로세서&amp;rsquo;인데요, 특히나 &amp;lsquo;전력 효율 향상&amp;rsquo;에 따라 현재 맥북프로의 램이 기존 16GB에서 32GB로 늘어날 수도 있을 것이라는 예측도 심심치 않게 나오고 있습니다.?&lt;/p&gt;
+
+&lt;p&gt;하지만 애플은 아직도(다른 의미에서 여전히) DDR4 RAM 지원이나 기존의 최대 RAM 용량의 업그레이드에 관한 어떠한 정보도 보여주지 않기에 이 부분은 미루어 두더라도 &amp;lsquo;카비레이크 프로세서&amp;rsquo;가 장착된 2세대 맥북프로가 올해 안에 출시가 될까요?&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

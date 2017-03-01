@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on 헥헥 블로그</title>
+    <link>https://hechek.github.io/categories/java/index.xml</link>
+    <description>Recent content in Java on 헥헥 블로그</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-kr</language>
+    <atom:link href="https://hechek.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>App Manager Scanning</title>
+      <link>https://hechek.github.io/blog/2017-02-16-app-manager-scanning/</link>
+      <pubDate>Thu, 16 Feb 2017 22:12:47 +0900</pubDate>
+      
+      <guid>https://hechek.github.io/blog/2017-02-16-app-manager-scanning/</guid>
+      <description>&lt;p&gt;Close the application and restart it again (there is one request that we want to see).&lt;/p&gt;
+
+&lt;p&gt;First request is a weird one. It is asking the server for the current date and time via a GET request to &lt;a href=&#34;http://appmanager.filehippo.com/api/v1/DateTime&#34; target=&#34;_blank&#34;&gt;http://appmanager.filehippo.com/api/v1/DateTime&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Get DateTime
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+GET /api/v1/DateTime HTTP/1.1
+User-Agent: download_manager
+ClientId: 4dfe2b82-501c-4324-83ce-6d49a96cdf61
+AppManagerVersion: 2.0.0.392
+AccessToken: 2N0+YwVnSXph9L0ZuS8zOmnSvvKHq10QYMtuM0GdUVmLp067RfBBpw==
+RequestTime: 2016-05-17T04:47:25.3968037Z
+Host: appmanager.filehippo.com
+Connection: close&lt;/p&gt;
+
+&lt;p&gt;Response body:
+{&amp;ldquo;DateTime&amp;rdquo;:&amp;ldquo;2016-05-17T04:47:57.0719162Z&amp;rdquo;,&amp;ldquo;Status&amp;rdquo;:0,&amp;ldquo;Message&amp;rdquo;:null}
+Note the AccessToken which is a 40 byte blob in base64. For this request we can remove the AccessToken and it works. Why would the app get the date and time from the server?&lt;/p&gt;
+
+&lt;p&gt;Then the app requests &lt;a href=&#34;http://appmanager.filehippo.com/api/v1/ProgramDefinitions&#34; target=&#34;_blank&#34;&gt;http://appmanager.filehippo.com/api/v1/ProgramDefinitions&lt;/a&gt; which is a list of all applications that are supported by the App Manager. This request also contains the AccessToken header which contains a base64 encoded 40 byte blob. It seems like this access token is also time sensitive because if you send the request to Repeater and then send it after 10 minutes the response is 401 Unauthorized while this did not happen in the DateTime request. At this point we do not know where this access token comes from because it is not in any of the responses (up until now we have only done the proxy test). There is also a 32 byte GUID named ClientId. Based on the previous request and the ClientId header, you can probably guess how the AccessToken is generated.&lt;/p&gt;
+
+&lt;p&gt;Retrieving program definitions
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+Request:
+GET /api/v1/ProgramDefinitions HTTP/1.1
+User-Agent: download_manager
+ClientId: &amp;hellip;
+AppManagerVersion: 2.0.0.392
+AccessToken: &amp;hellip;
+RequestTime: 2016-05-15T21:56:10.2127122Z
+Host: appmanager.filehippo.com
+Connection: close&lt;/p&gt;
+
+&lt;p&gt;Response body:
+{
+    &amp;ldquo;Status&amp;rdquo;: 0,
+    &amp;ldquo;Message&amp;rdquo;: null,
+    &amp;ldquo;Definitions&amp;rdquo;: [
+        {
+            &amp;ldquo;DetectionXML&amp;rdquo;: &amp;ldquo;&lt;fp&gt;\r\n    &lt;fn&gt;abiword.exe&lt;/fn&gt;\r\n    &lt;pfloc&gt;abisuite2\abiword\bin&lt;/pfloc&gt;\r\n&lt;/fp&gt;\r\n&lt;fp&gt;\r\n    &lt;fn&gt;abiword.exe&lt;/fn&gt;\r\n    &lt;pfloc&gt;abiword\bin&lt;/pfloc&gt;\r\n&lt;/fp&gt;\r\n&lt;reg&gt;\r\n    &lt;k hive=\&#34;hklm\&#34; key=\&#34;software\\abisuite\\abiword\\v2\&#34;&gt;\r\n        &lt;v name=\&#34;Version\&#34;/&gt;\r\n    &lt;/k&gt;\r\n&lt;/reg&gt;\r\n&lt;reg&gt;\r\n    &lt;k hive=\&#34;hklm\&#34; key=\&#34;software\\abiword\\v2\&#34;&gt;\r\n        &lt;v name=\&#34;Version\&#34;/&gt;\r\n    &lt;/k&gt;\r\n&lt;/reg&gt;&amp;rdquo;,
+            &amp;ldquo;ProgramId&amp;rdquo;: 135
+        },
+        {
+            &amp;ldquo;DetectionXML&amp;rdquo;: &amp;ldquo;&lt;fp&gt;\r\n    &lt;fn&gt;ACDSee&lt;em&gt;.exe&lt;/fn&gt;\r\n    &lt;pfloc&gt;ACD Systems\ACDSee\*&lt;/pfloc&gt;\r\n&lt;/fp&gt;\r\n&lt;fp&gt;\r\n    &lt;fn&gt;ACDSee&lt;/em&gt;.exe&lt;/fn&gt;\r\n    &lt;pfloc&gt;ACD Systems\ACDSee\17.0&lt;/pfloc&gt;\r\n&lt;/fp&gt;\r\n&lt;fp&gt;\r\n    &lt;fn&gt;ACDSee*.exe&lt;/fn&gt;\r\n    &lt;pfloc&gt;ACD Systems\ACDSee\18.0&lt;/pfloc&gt;\r\n&lt;/fp&gt;&amp;rdquo;,
+            &amp;ldquo;ProgramId&amp;rdquo;: 83
+        },
+        &amp;hellip;
+Next is a POST request to &lt;a href=&#34;http://appmanager.filehippo.com/api/v1/ScanResults&#34; target=&#34;_blank&#34;&gt;http://appmanager.filehippo.com/api/v1/ScanResults&lt;/a&gt; with a JSON payload in the body. The payload contains information about installed programs. The access token is also different.&lt;/p&gt;
+
+&lt;p&gt;POST ScanResults
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+parts of request&amp;rsquo;s body:
+{
+    &amp;ldquo;Programs&amp;rdquo;: [
+        {
+            &amp;ldquo;Registry&amp;rdquo;: [],
+            &amp;ldquo;Id&amp;rdquo;: 298,
+            &amp;ldquo;Files&amp;rdquo;: [
+                {
+                    &amp;ldquo;VerPv&amp;rdquo;: &amp;ldquo;2.0.0.392&amp;rdquo;,
+                    &amp;ldquo;VerPvr&amp;rdquo;: &amp;ldquo;2.0.0.392&amp;rdquo;,
+                    &amp;ldquo;Len&amp;rdquo;: 10566352,
+                    &amp;ldquo;VerFv&amp;rdquo;: &amp;ldquo;2.0.0.392&amp;rdquo;,
+                    &amp;ldquo;VerFvr&amp;rdquo;: &amp;ldquo;2.0.0.392&amp;rdquo;,
+                    &amp;ldquo;File&amp;rdquo;: &amp;ldquo;C:\Program Files (x86)\FileHippo.com\FileHippo.AppManager.exe&amp;rdquo;,
+                    &amp;ldquo;Md5&amp;rdquo;: &amp;ldquo;6798339CF7C87F5F567A8F050614D6B8&amp;rdquo;
+                }
+            ]
+        },
+        {
+            &amp;ldquo;Registry&amp;rdquo;: [],
+            &amp;ldquo;Id&amp;rdquo;: 12,
+            &amp;ldquo;Files&amp;rdquo;: [
+                {
+                    &amp;ldquo;VerPv&amp;rdquo;: &amp;ldquo;46.0.1&amp;rdquo;,
+                    &amp;ldquo;VerPvr&amp;rdquo;: &amp;ldquo;46.0.1.0&amp;rdquo;,
+                    &amp;ldquo;Len&amp;rdquo;: 392136,
+                    &amp;ldquo;VerFv&amp;rdquo;: &amp;ldquo;46.0.1&amp;rdquo;,
+                    &amp;ldquo;VerFvr&amp;rdquo;: &amp;ldquo;46.0.1.5966&amp;rdquo;,
+                    &amp;ldquo;File&amp;rdquo;: &amp;ldquo;C:\Program Files (x86)\Mozilla Firefox\firefox.exe&amp;rdquo;,
+                    &amp;ldquo;Md5&amp;rdquo;: &amp;ldquo;7DF8845A1CF92C227E81DBBC6F6434DF&amp;rdquo;
+                }
+            ]
+        }
+        &amp;hellip;
+}
+The response contains links to the applications that have updates. For example in this case, Firefox 47 Beta 2.0 is available.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
